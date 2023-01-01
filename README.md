@@ -1,16 +1,18 @@
-# taskeen
 
-A new Flutter project.
+# TASKEEN WATER DELIVERY APP FOR RIDER
 
-## Getting Started
+Features:
 
-This project is a starting point for a Flutter application.
+* Rider can add customer with details(Name, Address, Contact Number, Price per bottle)
+* Rider can deliver bottle in app 
+* Rider can see report of any customer
 
-A few resources to get you started if this is your first Flutter project:
+SCREENSHOTS:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+![1](https://user-images.githubusercontent.com/77250133/206900140-7af5293b-13b6-46e7-be2a-6c57b0ab30ff.PNG)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![2](https://user-images.githubusercontent.com/77250133/206900138-a370ffda-b2fb-4c88-a791-6698d370d5db.PNG)
+
+![3](https://user-images.githubusercontent.com/77250133/206900137-ef60be08-1803-414f-afed-75ccb4b838cb.PNG)
+
+![4](https://user-images.githubusercontent.com/77250133/206900135-74ad46d2-1798-4c52-a0d2-28ad5454eda4.PNG)
