@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:taskeen/homeScreen.dart';
 import 'package:taskeen/reportScreen.dart';
 import 'package:taskeen/utils/config.dart';
@@ -53,13 +54,23 @@ class _splashScreenState extends State<splashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Container(
-        decoration:BoxDecoration(
-          image:DecorationImage(
-            scale: 1.0,
-            image: AssetImage('assets/logo.jpg'),
-          ),
+      backgroundColor: Colors.black,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              child: Image.asset("assets/logo.png"),
+            ),
+            SizedBox(height: 50,),
+            CircularProgressIndicator(
+              backgroundColor: Colors.green,
+              strokeWidth: 4,
+
+            ),
+            SizedBox(height: 100,),
+            Text(" 0332-1424595",style: TextStyle(color: Colors.green,fontSize: 30,fontWeight: FontWeight.bold),),
+          ],
         ),
       ),
     );

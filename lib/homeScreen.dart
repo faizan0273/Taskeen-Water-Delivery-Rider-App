@@ -9,7 +9,6 @@ import 'package:loading_indicator/loading_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:taskeen/customerScreen.dart';
 import 'package:taskeen/reportScreen.dart';
-import 'package:taskeen/temp.dart';
 import 'package:taskeen/utils/firebase.dart';
 import 'package:taskeen/values/values.dart';
 import 'package:taskeen/widgets/clipShadowPath.dart';
@@ -17,6 +16,7 @@ import 'package:taskeen/widgets/custom_shape_clippers.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'Models/userModel.dart';
+import 'main.dart';
 
 class homeScreen extends StatefulWidget {
   const homeScreen({Key? key}) : super(key: key);
@@ -201,6 +201,7 @@ class _homeScreenState extends State<homeScreen> with TickerProviderStateMixin {
                                                                           pending=int.parse(snapshot.data!.payment.toString());
                                                                         });
                                                                         Navigator.pop(context);
+                                                                        setState((){});
                                                                       },
                                                                       child: Padding(
                                                                         padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 1),
@@ -396,6 +397,14 @@ class _homeScreenState extends State<homeScreen> with TickerProviderStateMixin {
                                 Semantics(
                                   label: "App Password",
                                   child: TextField(
+                                      keyboardType: TextInputType.number,
+                                      inputFormatters: <TextInputFormatter>[
+// for below version 2 use this
+                                        FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+// for version 2 and greater youcan also use this
+                                        FilteringTextInputFormatter.digitsOnly
+
+                                      ],
                                       textAlign: TextAlign.center,
                                     controller: returned_,
                                       obscureText: false,
@@ -526,7 +535,9 @@ class _homeScreenState extends State<homeScreen> with TickerProviderStateMixin {
         final DateTime now = DateTime.now();
         final DateFormat format = DateFormat('dd-MM-yyyy hh:mm:ss');
         final String formatted = format.format(now);
-        Map<String, dynamic> someData = {
+        final documentReference = deliveriesRef.doc();
+        final docId = documentReference.id;
+        documentReference.set({
           'id': id,
           'name':name,
           'quantity':quantity_.text,
@@ -535,10 +546,8 @@ class _homeScreenState extends State<homeScreen> with TickerProviderStateMixin {
           'pending':a.toString(),
           'date':'${formatted}',
           'returned':'${returned_.text}',
-          "doc": ''
-        };
-        DocumentReference doc_re=deliveriesRef.doc().set(someData).toString() as DocumentReference<Object?>;
-        deliveriesRef.doc(doc_re.id).update({'doc': "${doc_re.id}"});
+          "doc": docId,
+        });
         setState(() {
           state = ButtonState.submitting;
         });

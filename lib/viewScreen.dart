@@ -27,6 +27,9 @@ class _viewScreenState extends State<viewScreen> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    setState(() {
+
+    });
     initialize();
   }
   TextEditingController name=new TextEditingController();
@@ -280,14 +283,14 @@ class _viewScreenState extends State<viewScreen> with TickerProviderStateMixin {
                                       TextButton(
                                         child: Text('Confirm'),
                                         onPressed: () {
-                                          print("User Id");
-                                          print(user.id);
-                                          usersRef.doc(user.id).update({'address': address.text.toString()});
-                                          usersRef.doc(user.id).update({'name': name.text.toString()});
-                                          usersRef.doc(user.id).update({'number': number.text.toString()});
-                                          usersRef.doc(user.id).update({'price': price.text.toString()});
-                                          print('Confirmed');
                                           Navigator.of(context).pop();
+                                          setState(() {
+                                            usersRef.doc(user.id).update({'address': address.text.toString()});
+                                            usersRef.doc(user.id).update({'name': name.text.toString()});
+                                            usersRef.doc(user.id).update({'number': number.text.toString()});
+                                            usersRef.doc(user.id).update({'price': price.text.toString()});
+                                          });
+                                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => viewScreen(profileId: user.id.toString(),)));
                                         },
                                       ),
                                       TextButton(
@@ -474,12 +477,16 @@ class _viewScreenState extends State<viewScreen> with TickerProviderStateMixin {
                                                           TextButton(
                                                             child: Text('Confirm'),
                                                             onPressed: () {
-                                                              deliveriesRef.doc(snapshot.data![index].id).update({'paid': paid.text.toString()});
-                                                              deliveriesRef.doc(snapshot.data![index].id).update({'pending': pending.text.toString()});
-                                                              deliveriesRef.doc(snapshot.data![index].id).update({'quantity': delivered.text.toString()});
-                                                              deliveriesRef.doc(snapshot.data![index].id).update({'returned': returned.text.toString()});
-                                                              deliveriesRef.doc(snapshot.data![index].id).update({'total': total.text.toString()});
+                                                              deliveriesRef.doc(snapshot.data![index].doc).update({'paid': paid.text.toString()});
+                                                              deliveriesRef.doc(snapshot.data![index].doc).update({'pending': pending.text.toString()});
+                                                              deliveriesRef.doc(snapshot.data![index].doc).update({'quantity': delivered.text.toString()});
+                                                              deliveriesRef.doc(snapshot.data![index].doc).update({'returned': returned.text.toString()});
+                                                              deliveriesRef.doc(snapshot.data![index].doc).update({'total': total.text.toString()});
+                                                              print("DOC ID:  ${snapshot.data![index].doc}");
                                                               print('Confirmed');
+                                                              setState(() {
+
+                                                              });
                                                               Navigator.of(context).pop();
                                                             },
                                                           ),
